@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "screentime-exporter"
+version = "0.1.0"
+description = "Export macOS Screen Time data to CSV"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    { name = "Kohei" }
+]
+dependencies = [
+    "pyobjc-framework-Vision>=10.0",
+    "pyobjc-framework-Quartz>=10.0",
+    "pyautogui>=0.9.54",
+    "Pillow>=10.0.0",
+    "pandas>=2.0.0",
+    "click>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+screentime-export = "screentime_exporter.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/screentime_exporter"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
